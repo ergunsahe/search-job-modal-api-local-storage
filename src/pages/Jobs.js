@@ -40,18 +40,17 @@ const Jobs= (props) =>{
         let savedJobList = await AsyncStorage.getItem("@SAVED_JOB")
         savedJobList= savedJobList== null ? [] : JSON.parse(savedJobList)
         let updatedJobList= [...savedJobList, selectedJob]
+        
         savedJobList.map((t) =>{
-            if (t.id==selectedJob.id && savedJobList !==null){
+            if (t.id===selectedJob.id ){
                 alert("You have already saved this job")
-                updatedJobList=[...savedJobList]
-            }else{
-                 updatedJobList= [...savedJobList, selectedJob]
-                 return updatedJobList
+                updatedJobList.pop()
+                
             }
         })
-        
         await AsyncStorage.setItem("@SAVED_JOB", JSON.stringify(updatedJobList))
-        console.log(selectedJob.id)
+       
+        
        
     }
 
